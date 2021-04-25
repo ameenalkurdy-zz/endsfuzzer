@@ -55,7 +55,7 @@ func main() {
 					conf := &tls.Config{InsecureSkipVerify: true}
 					dialer := &net.Dialer{Timeout: time.Duration(*timeout) * time.Second}
 					request := []byte(
-						"GET /" + endpoint + " HTTP/1.1" + "\r\n" +
+						"GET " + endpoint + " HTTP/1.1" + "\r\n" +
 							"Host: " + domain + "\r\n" +
 							"Connection: close" + "\r\n" +
 							"X-Originating-IP: 127.0.0.1" + "\r\n" +
@@ -96,16 +96,16 @@ func main() {
 								}
 							}
 							if strings.Contains(redirect, "http://") || strings.Contains(redirect, "https://") {
-								fmt.Println("https://" + domain + "/" + endpoint + " " + strings.Split(response[0], " ")[1] + " -> " + redirect)
+								fmt.Println("https://" + domain + endpoint + " " + strings.Split(response[0], " ")[1] + " -> " + redirect)
 								subdomainsWG.Done()
 								return
 							} else {
-								fmt.Println("https://" + domain + "/" + endpoint + " " + strings.Split(response[0], " ")[1] + " -> " + "https://" + domain + redirect)
+								fmt.Println("https://" + domain + endpoint + " " + strings.Split(response[0], " ")[1] + " -> " + "https://" + domain + redirect)
 								subdomainsWG.Done()
 								return
 							}
 						} else {
-							fmt.Println("http://" + domain + "/" + endpoint + " " + strings.Split(response[0], " ")[1])
+							fmt.Println("http://" + domain + endpoint + " " + strings.Split(response[0], " ")[1])
 							subdomainsWG.Done()
 							return
 						}
@@ -134,16 +134,16 @@ func main() {
 								}
 							}
 							if strings.Contains(redirect, "http://") || strings.Contains(redirect, "https://") {
-								fmt.Println("https://" + domain + "/" + endpoint + " " + strings.Split(response[0], " ")[1] + " -> " + redirect)
+								fmt.Println("https://" + domain + endpoint + " " + strings.Split(response[0], " ")[1] + " -> " + redirect)
 								subdomainsWG.Done()
 								return
 							} else {
-								fmt.Println("https://" + domain + "/" + endpoint + " " + strings.Split(response[0], " ")[1] + " -> " + "https://" + domain + redirect)
+								fmt.Println("https://" + domain + endpoint + " " + strings.Split(response[0], " ")[1] + " -> " + "https://" + domain + redirect)
 								subdomainsWG.Done()
 								return
 							}
 						} else {
-							fmt.Println("https://" + domain + "/" + endpoint + " " + strings.Split(response[0], " ")[1])
+							fmt.Println("https://" + domain + endpoint + " " + strings.Split(response[0], " ")[1])
 							subdomainsWG.Done()
 							return
 						}
